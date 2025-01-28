@@ -1,5 +1,5 @@
 #!/bin/python3
-# 4.06
+# 4.07
 import logging
 import sys
 import time
@@ -98,47 +98,6 @@ class ConnectFailed(Exception):
         super().__init__(*args, **kwargs)
 
 
-def check_for_updates():
-    """
-    Check the server for updated backup script version, if exists, download, replace existing file, and relaunch
-    the backup preserving the command line parameters
-    :return: Nothing
-    """
-    req = Request(BACKUP_SCRIPT_VERSION_URL)
-    try:
-        resource = urlopen(req)
-        return_data = resource.read().strip()
-        hosted_version = float(return_data.decode('utf-8'))
-
-        if hosted_version > LOCAL_VERSION:
-            # get the new version and save as temp file
-            with TemporaryDirectory() as temp_dir:
-                with NamedTemporaryFile(dir=temp_dir) as temp_file:
-                    req = Request(BACKUP_SCRIPT_URL)
-                    try:
-                        resource = urlopen(req)
-                        temp_file.write(resource.read())
-                        if os.path.isfile(BACKUP_SCRIPT):
-                            os.rename(BACKUP_SCRIPT, f'{BACKUP_SCRIPT}.prev')
-                        shutil.copy(temp_file.name, BACKUP_SCRIPT)
-                        os.chmod(BACKUP_SCRIPT, 0o775)
-                    except Exception as e:
-                        print(e)
-                        return
-
-            # Relaunch updated backup script with preserved args
-            args = sys.argv[1:]
-            python_executable = sys.executable
-            os.execl(python_executable, python_executable, *([sys.argv[0]] + args))
-
-        else:
-            return  # do nothing we already have the current version
-
-    except Exception as ex_unknown:
-        logging.debug(f'unknown error: {ex_unknown}')
-        return
-
-
 def upload_backup(folder, file, serial):
     """
     Upload the backup file to the server
@@ -210,7 +169,7 @@ def get_box_serial() -> str:
 
 
 def main():
-    check_for_updates()
+    #check_for_updates()
 
     knock_at_door()
     try:
