@@ -17,7 +17,7 @@ CONFDEF box/boxother/boxcron partial 9.0
 
 [hjob_DynIP]
 GDESC =
-DESCRIPTION = Post IP address to MGMT server
+DESCRIPTION = Post IP address
 COMMANDS[0] = /var/phion/home/dynip.py
 MINUTES = every
 MINLIST = 0
