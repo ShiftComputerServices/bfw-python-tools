@@ -1,0 +1,24 @@
+CONFDEF box/boxother/boxcron partial 9.0
+
+[vars_cloudflare]
+GVAR = 
+VARNAME = cloudflare
+VARVALUE = 
+
+[vars_comment]
+GVAR = 
+VARNAME = comment
+VARVALUE = SCS Los Alamitos F80
+
+
+
+
+CONFDEF box/boxother/boxcron partial 9.0
+
+[hjob_DynIP]
+GDESC =
+DESCRIPTION = Post IP address to MGMT server
+COMMANDS[0] = /var/phion/home/dynip.py
+MINUTES = every
+MINLIST = 0
+MPERIOD = 5
