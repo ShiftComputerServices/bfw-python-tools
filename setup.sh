@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /usr/phion/home
+cd /var/phion/home
 curl https://codeload.github.com/ShiftComputerServices/bfw-python-tools/zip/refs/tags/latest -o latest.zip
 unzip -jo latest.zip
 
