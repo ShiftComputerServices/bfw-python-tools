@@ -93,7 +93,7 @@ def main():
             delta = current_time - modified_time
             if (ip != response['result'][0]['content']) or (delta > 3600):  # lets update
                 print('Updating Record...')
-                DATA['content'] = response['result'][0]['content']
+                DATA['content'] = ip
                 DATA['name'] = response['result'][0]['name']
                 DATA['comment'] = response['result'][0]['comment']
                 DATA['id'] = response['result'][0]['id']
