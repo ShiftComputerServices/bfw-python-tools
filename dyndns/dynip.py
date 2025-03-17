@@ -46,12 +46,14 @@ def get_ip():
     if response.status_code == 200:
         print('ipify')
         ip = json.loads(response.text)['ip']
+        print(ip)
         return ip
 
     response = requests.get("http://api.db-ip.com/v2/free/self/ipAddress")
     if response.status_code == 200:
         print('db-ip')
         ip = response.text
+        print(ip)
         return ip
 
     response = requests.get("https://freeipapi.com/api/json")
@@ -59,6 +61,7 @@ def get_ip():
         print('freeipapi')
         response = json.loads(response.text)
         ip = response['ipAddress']
+        print(ip)
         return ip
 
 
@@ -77,7 +80,7 @@ def cloudflare_update(data):
 
 def cloudflare_get_records(serial):
     url = f'https://api.cloudflare.com/client/v4/zones/{ZONE}/dns_records'
-    return requests.request("GET", url, headers=HEADERS, params=f'name=contains:{serial}').json()
+    return requests.request("GET", url, headers=HEADERS, params=f'name.contains={serial}').json()
 
 
 def main():
